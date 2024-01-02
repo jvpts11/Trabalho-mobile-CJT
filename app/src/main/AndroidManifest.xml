@@ -16,7 +16,8 @@
             android:name=".RegisterActivity"
             android:exported="false"
             android:label="@string/title_activity_register"
-            android:theme="@style/Theme.CJTApp" />
+            android:theme="@style/Theme.CJTApp"
+            android:parentActivityName=".LoginActivity"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true"
@@ -29,7 +30,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
