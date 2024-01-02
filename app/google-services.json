@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "689881606293",
+    "project_id": "cjt-app",
+    "storage_bucket": "cjt-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689881606293:android:7faa9f0f9419efd6e8139c",
+        "android_client_info": {
+          "package_name": "trabalho.mobile.cjt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMEf-WWrtH9sJZcBIgm2K6clUkaYAMkOg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
