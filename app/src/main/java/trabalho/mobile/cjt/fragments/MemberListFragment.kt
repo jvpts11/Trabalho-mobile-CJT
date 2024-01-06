@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,6 +35,8 @@ class MemberListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding =  FragmentMemberListBinding.inflate(inflater, container, false)
 
+        memberList.add(User("André", 22))
+
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
         dbRef.addValueEventListener(object : ValueEventListener {
 
@@ -43,6 +46,9 @@ class MemberListFragment : Fragment() {
                         val user = userSnapshot.getValue(User::class.java)
                         memberList.add(user!!)
                     }
+
+                    val listView = binding.memberList
+                    listView.adapter = memberListAdapter(memberList, context)
                 }
             }
 
@@ -51,9 +57,6 @@ class MemberListFragment : Fragment() {
             }
 
         })
-
-        val listView = binding.memberList
-        listView.adapter = memberListAdapter(memberList, this.context)
 
         return binding.root
     }
