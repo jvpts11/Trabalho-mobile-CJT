@@ -25,4 +25,11 @@
         android:title="Suggestion"
         android:id="@+id/menu_item_suggestion"
         android:icon="@drawable/pencil_icon"/>
+
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Profile"
+        android:id="@+id/menu_item_profile"
+        android:icon="@drawable/person_icon"/>
 </menu>

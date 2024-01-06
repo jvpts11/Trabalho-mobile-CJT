@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import trabalho.mobile.cjt.databinding.ActivityMainBinding
+import trabalho.mobile.cjt.fragments.MemberListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,16 +13,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        /*
-        binding.mainBottomNav.setOnItemSelectedListener {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-            when(it.itemId){
+        val navBar = binding.mainBottomNav
+        navBar.setOnItemSelectedListener {
 
+            when (it.itemId){
+                R.id.menu_item_members -> replaceFragment(MemberListFragment())
+                else -> {
+
+                }
             }
-
+            true
         }
-        */
     }
 
     private fun replaceFragment(fragment: Fragment){

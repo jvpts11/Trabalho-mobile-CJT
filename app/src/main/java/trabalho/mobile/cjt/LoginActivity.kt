@@ -51,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
     private fun loginUser(txtEmail:String, txtPassword:String){
         auth.signInWithEmailAndPassword(txtEmail,txtPassword).addOnCompleteListener(this) { task->
             if(task.isSuccessful){
