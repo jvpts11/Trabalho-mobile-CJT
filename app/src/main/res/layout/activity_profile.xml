@@ -4,6 +4,148 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".ProfileActivity"
+    android:background="@color/white">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/club_green"/>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="15dp"
+        android:background="@color/white"
+        tools:layout_editor_absoluteX="15dp"
+        tools:layout_editor_absoluteY="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
+        android:text="PROFILE"
+        android:textStyle="bold"
+        android:textColor="@color/club_green"
+        android:textSize="60dp"
+        android:id="@+id/titleProfile"/>
+
+    <View
+        android:id="@+id/separation_line"
+        android:layout_width="300dp"
+        android:layout_height="5dp"
+        app:layout_constraintTop_toBottomOf="@id/titleProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/club_green"/>
+
+    <EditText
+        android:id="@+id/userNameEditText"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        app:layout_constraintTop_toBottomOf="@id/separation_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/usernameApplyButton"
+        android:text="USERNAME"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="@color/darker_club_green"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/usernameApplyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/userNameEditText"
+        android:backgroundTint="@color/club_green"
+        android:text="APPLY"
+        android:textSize="30dp"
+        android:layout_marginTop="30dp"/>
+
+    <View
+        android:id="@+id/separation_line_2"
+        android:layout_width="300dp"
+        android:layout_height="5dp"
+        app:layout_constraintTop_toBottomOf="@id/usernameApplyButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/club_green"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/separation_line_2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="ATTENDANCE"
+        android:textStyle="bold"
+        android:textColor="@color/club_green"
+        android:textSize="50dp"
+        android:id="@+id/titleAttendance"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/titleAttendance"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="0"
+        android:textStyle="bold"
+        android:textColor="@color/club_green"
+        android:textSize="70dp"
+        android:id="@+id/attendanceNumber"/>
+
+    <View
+        android:id="@+id/separation_line_3"
+        android:layout_width="300dp"
+        android:layout_height="5dp"
+        app:layout_constraintTop_toBottomOf="@id/attendanceNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/club_green"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/separation_line_3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="LEVEL"
+        android:textStyle="bold"
+        android:textColor="@color/club_green"
+        android:textSize="50dp"
+        android:id="@+id/titleLevel"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/titleLevel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="0"
+        android:textStyle="bold"
+        android:textColor="@color/club_green"
+        android:textSize="70dp"
+        android:id="@+id/levelNumber"/>
+
+    <ImageButton
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="15dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/baseline_arrow_circle_left_24"
+        android:backgroundTint="@color/club_green"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

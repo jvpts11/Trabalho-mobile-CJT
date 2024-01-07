@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import trabalho.mobile.cjt.databinding.ActivityMainBinding
 import trabalho.mobile.cjt.fragments.MemberListFragment
+import trabalho.mobile.cjt.fragments.NewsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId){
                 R.id.menu_item_members -> replaceFragment(MemberListFragment())
                 R.id.menu_item_suggestion -> swapActivity(Intent(this@MainActivity,SuggestionActivity::class.java))
+                R.id.menu_item_home -> replaceFragment(NewsFragment())
                 else -> {
 
                 }

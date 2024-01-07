@@ -15,4 +15,6 @@
     <color name="lv5color">#515050</color>
     <color name="club_green">#028002</color>
     <color name="darker_club_green">#014E01</color>
+    <color name="pastel_club_green">#559755</color>
+    <color name="pastel_darker_club_green">#456745</color>
 </resources>
