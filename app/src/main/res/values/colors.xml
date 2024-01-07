@@ -8,4 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#9F9F9F</color>
+    <color name="lv1color">#63BA67</color>
+    <color name="lv2color">#6CACDF</color>
+    <color name="lv3color">#DA6E6E</color>
+    <color name="lv4color">#8E5D97</color>
+    <color name="lv5color">#515050</color>
+    <color name="club_green">#028002</color>
 </resources>

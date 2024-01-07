@@ -4,8 +4,13 @@
     android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginVertical="10dp"
-    android:layout_marginHorizontal="10dp"
-    android:background="@color/grey">
+    android:layout_marginHorizontal="10dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey"
+        android:id="@+id/itemBackground"/>
 
     <TextView
         android:layout_width="190dp"

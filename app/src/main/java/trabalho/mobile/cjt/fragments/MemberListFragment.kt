@@ -1,7 +1,9 @@
 package trabalho.mobile.cjt.fragments
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +13,11 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.graphics.toColor
+import com.google.common.io.Resources.getResource
+import com.google.firebase.annotations.concurrent.Background
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -86,9 +93,34 @@ class MemberListFragment : Fragment() {
 
             val memberName = memberView.findViewById<TextView>(R.id.memberName)
             val memberAttendance = memberView.findViewById<TextView>(R.id.memberAttendance)
+            val memberBackground = memberView.findViewById<View>(R.id.itemBackground)
 
             memberName.text = memberList[position].name
             memberAttendance.text = memberList[position].attendance.toString()
+
+            val atd : Int = memberList[position].attendance
+            val color : Int
+
+            if (atd < 4) {
+                color = ContextCompat.getColor(mContext!!, R.color.lv1color)
+            }
+            else if (atd in 5..8){
+                color = ContextCompat.getColor(mContext!!, R.color.lv2color)
+            }
+            else if (atd in 10..14){
+                color = ContextCompat.getColor(mContext!!, R.color.lv3color)
+            }
+            else if (atd in 16..21){
+                color = ContextCompat.getColor(mContext!!, R.color.lv4color)
+            }
+            else if (atd >= 22){
+                color = ContextCompat.getColor(mContext!!, R.color.lv5color)
+            }
+            else{
+                color = 0
+            }
+
+            memberBackground.setBackgroundColor(color)
 
             return memberView
         }

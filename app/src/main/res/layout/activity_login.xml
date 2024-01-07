@@ -7,55 +7,78 @@
     android:fitsSystemWindows="true"
     tools:context=".LoginActivity">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/club_green"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_margin="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
+        android:text="CJT APP"
+        android:textStyle="bold"
+        android:textColor="@color/club_green"
+        android:textSize="60dp"
+        android:id="@+id/titleCJT"/>
+
     <EditText
         android:id="@+id/login_editText_email"
         android:layout_width="298dp"
         android:layout_height="74dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="185dp"
-        android:layout_marginEnd="57dp"
-        android:layout_marginBottom="472dp"
-        android:ems="10"
-        android:hint="Email"
+        app:layout_constraintTop_toBottomOf="@id/titleCJT"
+        android:hint="E-mail"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/login_editText_password"/>
+
 
     <EditText
         android:id="@+id/login_editText_password"
         android:layout_width="298dp"
         android:layout_height="74dp"
-        android:layout_marginTop="68dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_editText_email"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@id/login_login_button"
+        android:hint="Password"
+        android:inputType="textPassword"/>
 
-    <Button
-        android:id="@+id/login_register_button"
-        android:layout_width="220dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="164dp"
-        android:text="Register"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/login_login_button"
-        android:layout_width="220dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="24dp"
-        android:text="Login"
+        android:layout_width="280dp"
+        android:layout_height="70dp"
+        android:text="LOGIN"
+        app:layout_constraintTop_toBottomOf="@id/login_editText_password"
         app:layout_constraintBottom_toTopOf="@+id/login_register_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/club_green"
+        android:textSize="40dp"
+        android:textAlignment="center"/>
+
+    <Button
+        android:id="@+id/login_register_button"
+        android:layout_width="280dp"
+        android:layout_height="70dp"
+        android:text="REGISTER"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/login_login_button"
+        android:backgroundTint="@color/club_green"
+        android:textSize="40dp"
+        android:layout_marginBottom="50dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
