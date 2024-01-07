@@ -38,6 +38,11 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
+        if(auth.currentUser != null){
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
+        }
+
         loginButton.setOnClickListener {
             var txt_email = emailText.text.toString()
             var txt_password = passwordText.text.toString()
