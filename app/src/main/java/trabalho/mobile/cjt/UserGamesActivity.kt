@@ -67,15 +67,15 @@ class UserGamesActivity : AppCompatActivity() {
         dbRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
+                    userGames.clear()
                     for (gameSnapshot in snapshot.children){
                         val game = gameSnapshot.getValue(Game::class.java)
                         if (game?.gameOwnerID == uid){
                             userGames.add(game!!)
                         }
                     }
-                    userGames.add(Game("ROOT", "hawdgciuh"))
                     val listView = binding.userGamesList
-                    listView.adapter = UserGamesListAdapter(userGames, this@UserGamesActivity)
+                    listView.adapter = UserGamesListAdapter(userGames, this@UserGamesActivity, dbRef)
                 }
             }
 
@@ -111,11 +111,13 @@ class UserGamesActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    class UserGamesListAdapter(val gamesList : MutableList<Game>, context : Context?) : BaseAdapter(){
+    class UserGamesListAdapter(val gamesList : MutableList<Game>, context : Context?, databaseRef : DatabaseReference) : BaseAdapter(){
 
+        private val dbRef : DatabaseReference
         private val mContext : Context?
         init{
             mContext = context
+            dbRef = databaseRef
         }
 
         override fun getCount(): Int {
@@ -136,6 +138,11 @@ class UserGamesActivity : AppCompatActivity() {
 
             val gameName = userGameView.findViewById<TextView>(R.id.game_name)
             gameName.text = gamesList[position].gameName
+
+            val deleteBtn = userGameView.findViewById<ImageButton>(R.id.delete_user_game_btn)
+            deleteBtn.setOnClickListener {
+                dbRef.child(gamesList[position].gameName).removeValue()
+            }
 
             return userGameView
         }
