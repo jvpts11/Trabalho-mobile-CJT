@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -91,29 +92,17 @@ class GamesListFragment : Fragment() {
             val gameName = allGamesItemView.findViewById<TextView>(R.id.all_games_name)
             val gameOwner = allGamesItemView.findViewById<TextView>(R.id.all_games_owner)
 
-            lateinit var gameOwnerName : String
-
             val currID = allGamesList[position].gameOwnerID
-            val auxRef = dbUsersRef.child(currID).child("name")
+            val auxRef = dbUsersRef.child(currID)
 
-            auxRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val nome = dataSnapshot.getValue(String::class.java)
-
-                    if (nome != null) {
-                        gameOwnerName = nome
-                    } else {
-                        gameOwnerName = "a"
-                    }
+            auxRef.get().addOnSuccessListener {
+                if (it.exists()){
+                    gameOwner.text = it.child("name").value.toString()
                 }
-
-                override fun onCancelled(error: DatabaseError) {
-                    //nothing here
-                }
-            })
+            }
 
             gameName.text = allGamesList[position].gameName
-            gameOwner.text = gameOwnerName
+            Toast.makeText(mContext , gameOwner.text, Toast.LENGTH_SHORT).show()
 
             return allGamesItemView
         }
