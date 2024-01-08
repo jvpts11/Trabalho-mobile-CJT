@@ -139,6 +139,7 @@
         android:id="@+id/levelNumber"/>
 
     <ImageButton
+        android:id="@+id/go_back_btn"
         android:layout_width="70dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -14,6 +14,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import org.w3c.dom.Text
 import trabalho.mobile.cjt.databinding.ActivityLoginBinding
 
@@ -37,11 +39,6 @@ class LoginActivity : AppCompatActivity() {
         registerButton = findViewById(R.id.login_register_button)
 
         auth = FirebaseAuth.getInstance()
-
-        if(auth.currentUser != null){
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-            finish()
-        }
 
         loginButton.setOnClickListener {
             var txt_email = emailText.text.toString()
