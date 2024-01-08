@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import trabalho.mobile.cjt.databinding.ActivityMainBinding
 import trabalho.mobile.cjt.fragments.MemberListFragment
 import trabalho.mobile.cjt.fragments.NewsFragment
+import trabalho.mobile.cjt.fragments.SuggestionFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,12 +19,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        replaceFragment(NewsFragment())
+
         val navBar = binding.mainBottomNav
         navBar.setOnItemSelectedListener {
 
             when (it.itemId){
                 R.id.menu_item_members -> replaceFragment(MemberListFragment())
-                R.id.menu_item_suggestion -> swapActivity(Intent(this@MainActivity,SuggestionActivity::class.java))
+                R.id.menu_item_suggestion -> replaceFragment(SuggestionFragment())
                 R.id.menu_item_home -> replaceFragment(NewsFragment())
                 else -> {
 

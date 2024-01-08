@@ -1,9 +1,12 @@
-package trabalho.mobile.cjt
+package trabalho.mobile.cjt.fragments
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -13,21 +16,27 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import trabalho.mobile.cjt.MainActivity
+import trabalho.mobile.cjt.R
 
-class SuggestionActivity : AppCompatActivity() {
+class SuggestionFragment : Fragment() {
 
-    private lateinit var suggestionButton : Button
+    private lateinit var suggestionButton: Button
     private lateinit var suggestionEditText: EditText
 
-    private lateinit var dbref : DatabaseReference
-    private lateinit var auth : FirebaseAuth
+    private lateinit var dbref: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_suggestion)
+    }
 
-        suggestionButton = findViewById(R.id.suggestion_button)
-        suggestionEditText = findViewById(R.id.suggestion_text_field)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val view = inflater.inflate(R.layout.fragment_suggestion, container, false)
+
+        suggestionButton = view.findViewById(R.id.suggestion_button)
+        suggestionEditText = view.findViewById(R.id.suggestion_text_field)
 
         dbref = FirebaseDatabase.getInstance().getReference("Users")
         auth = FirebaseAuth.getInstance()
@@ -36,7 +45,7 @@ class SuggestionActivity : AppCompatActivity() {
             var suggestionText = suggestionEditText.text.toString()
 
             if (TextUtils.isEmpty(suggestionText)) {
-                Toast.makeText(this, "Insira uma sugestão!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Insira uma sugestão!", Toast.LENGTH_SHORT).show()
             } else {
                 val currentUser = auth.currentUser
                 if (currentUser != null) {
@@ -51,7 +60,7 @@ class SuggestionActivity : AppCompatActivity() {
                                 registerSuggestion(userId, userName, suggestionText)
                             } else {
                                 Toast.makeText(
-                                    this@SuggestionActivity,
+                                    requireContext(),
                                     "Erro ao obter informações do usuário.",
                                     Toast.LENGTH_SHORT
                                 ).show()
@@ -60,17 +69,19 @@ class SuggestionActivity : AppCompatActivity() {
 
                         override fun onCancelled(error: DatabaseError) {
                             Toast.makeText(
-                                this@SuggestionActivity,
+                                requireContext(),
                                 "Erro ao obter informações do usuário.",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
                     })
                 } else {
-                    Toast.makeText(this, "Usuário não autenticado.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Usuário não autenticado.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
+
+        return view;
     }
 
     private fun registerSuggestion(userId: String, userName: String, suggestion: String) {
@@ -81,8 +92,7 @@ class SuggestionActivity : AppCompatActivity() {
         suggestionsRef.child("userName").setValue(userName)
         suggestionsRef.child("suggestion").setValue(suggestion)
 
-        Toast.makeText(this, "Sugestão registrada com sucesso!", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this@SuggestionActivity, MainActivity::class.java))
-        finish()  // Finalizar a atividade após o registro da sugestão
+        Toast.makeText(requireContext(), "Sugestão registrada com sucesso!", Toast.LENGTH_SHORT).show()
     }
+
 }
