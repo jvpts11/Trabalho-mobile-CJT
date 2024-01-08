@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import trabalho.mobile.cjt.databinding.ActivityMainBinding
+import trabalho.mobile.cjt.fragments.GamesListFragment
 import trabalho.mobile.cjt.fragments.MemberListFragment
 import trabalho.mobile.cjt.fragments.NewsFragment
 import trabalho.mobile.cjt.fragments.SuggestionFragment
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_item_members -> replaceFragment(MemberListFragment())
                 R.id.menu_item_suggestion -> replaceFragment(SuggestionFragment())
                 R.id.menu_item_home -> replaceFragment(NewsFragment())
+                R.id.menu_item_games -> replaceFragment(GamesListFragment())
                 else -> {
 
                 }
