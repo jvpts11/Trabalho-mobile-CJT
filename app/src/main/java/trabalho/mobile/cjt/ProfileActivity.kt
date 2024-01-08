@@ -38,6 +38,10 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(Intent(this@ProfileActivity,MainActivity::class.java))
             finish()
         }
+
+        binding.usernameApplyButton.setOnClickListener({
+            dbRef.child(uid).child("name").setValue(binding.userNameEditText.text.toString())
+        })
     }
 
     private fun getUserData() {
@@ -51,19 +55,19 @@ class ProfileActivity : AppCompatActivity() {
                 val color : Int
 
                 if (atd < 4) {
-                    color = ContextCompat.getColor(applicationContext, R.color.lv1color)
+                    color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv1color)
                 }
                 else if (atd in 5..8){
-                    color = ContextCompat.getColor(applicationContext, R.color.lv2color)
+                    color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv2color)
                 }
                 else if (atd in 10..14){
-                    color = ContextCompat.getColor(applicationContext, R.color.lv3color)
+                    color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv3color)
                 }
                 else if (atd in 16..21){
-                    color = ContextCompat.getColor(applicationContext, R.color.lv4color)
+                    color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv4color)
                 }
                 else if (atd >= 22){
-                    color = ContextCompat.getColor(applicationContext, R.color.lv5color)
+                    color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv5color)
                 }
                 else{
                     color = 0

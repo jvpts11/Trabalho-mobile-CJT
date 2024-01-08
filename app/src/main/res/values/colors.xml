@@ -17,4 +17,9 @@
     <color name="darker_club_green">#014E01</color>
     <color name="pastel_club_green">#559755</color>
     <color name="pastel_darker_club_green">#456745</color>
+    <color name="vibrant_lv1color">#028002</color>
+    <color name="vibrant_lv2color">#1E71B3</color>
+    <color name="vibrant_lv3color">#B80606</color>
+    <color name="vibrant_lv4color">#9113A8</color>
+    <color name="vibrant_lv5color">#000000</color>
 </resources>

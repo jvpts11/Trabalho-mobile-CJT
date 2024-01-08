@@ -46,6 +46,8 @@ class RegisterActivity : AppCompatActivity() {
             var password_text = passwordText.text.toString()
             var username_text = username.text.toString()
 
+            Toast.makeText(this,"Palavra-passe muito curta!", Toast.LENGTH_SHORT)
+
             if(TextUtils.isEmpty(email_text) || TextUtils.isEmpty(password_text)){
                 Toast.makeText(this,"Credenciais vazias!", Toast.LENGTH_SHORT)
             }else if(password_text.length < 5){

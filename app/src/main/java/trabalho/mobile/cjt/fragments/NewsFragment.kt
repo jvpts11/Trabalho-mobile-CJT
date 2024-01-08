@@ -19,6 +19,7 @@ import com.google.protobuf.Value
 import trabalho.mobile.cjt.ProfileActivity
 import trabalho.mobile.cjt.R
 import trabalho.mobile.cjt.User
+import trabalho.mobile.cjt.UserGamesActivity
 import trabalho.mobile.cjt.databinding.FragmentMemberListBinding
 import trabalho.mobile.cjt.databinding.FragmentNewsBinding
 
@@ -32,6 +33,7 @@ class NewsFragment : Fragment() {
     private lateinit var binding: FragmentNewsBinding
 
     private lateinit var profileAccessButton : Button
+    private lateinit var userGamesAccessButton : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +51,15 @@ class NewsFragment : Fragment() {
         binding =  FragmentNewsBinding.inflate(inflater, container, false)
 
         profileAccessButton = binding.profileAccessButton
+        userGamesAccessButton = binding.userGamesAccessButton
 
         profileAccessButton.setOnClickListener(){
             val intent = Intent(activity, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        userGamesAccessButton.setOnClickListener(){
+            val intent = Intent(activity, UserGamesActivity::class.java)
             startActivity(intent)
         }
 
@@ -63,6 +71,7 @@ class NewsFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 user = snapshot.getValue(User::class.java)!!
                 binding.profilePageTile.setText(user.name + "'s PAGE")
+                binding.userGamesTile.setText(user.name + "'s GAMES")
             }
 
             override fun onCancelled(error: DatabaseError) {

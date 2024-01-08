@@ -42,8 +42,6 @@ class MemberListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding =  FragmentMemberListBinding.inflate(inflater, container, false)
 
-        memberList.add(User("André", 22))
-
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
         dbRef.addValueEventListener(object : ValueEventListener {
 
