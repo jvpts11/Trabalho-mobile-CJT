@@ -42,30 +42,6 @@ class NewsFragment : Fragment() {
 
     private lateinit var newsImage : ImageView
 
-    private lateinit var storageRef: StorageReference
-    private var selectedImageUri: Uri? = null
-
-    private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            selectedImageUri = data?.data
-
-            // Verifica se a URI da imagem selecionada é válida
-            if (selectedImageUri != null) {
-                // A imagem já foi selecionada, pode fazer o upload para o Firebase aqui se necessário
-                uploadImageToFirebase(selectedImageUri!!)
-            } else {
-                // A imagem ainda não foi selecionada, permita que o usuário escolha uma
-                selectImage()
-            }
-
-            Glide.with(this)
-                .load(selectedImageUri)
-                .apply(RequestOptions.circleCropTransform())
-                .into(newsImage)
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -77,7 +53,6 @@ class NewsFragment : Fragment() {
             getUserData()
         }
 
-        storageRef = FirebaseStorage.getInstance().reference.child("News")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -98,59 +73,13 @@ class NewsFragment : Fragment() {
         }
 
         newsImage.setOnClickListener {
-            // Verifica se a URI da imagem selecionada é válida
-            if (selectedImageUri != Uri.EMPTY) {
-                // A imagem já foi selecionada, pode fazer o upload para o Firebase aqui se necessário
-                uploadImageToFirebase(selectedImageUri!!)
-            } else {
-                // A imagem ainda não foi selecionada, permita que o usuário escolha uma
-                selectImage()
+            if(user.isAdmin) {
+                Toast.makeText(this.context, "Registering a new Champion!", Toast.LENGTH_SHORT)
             }
         }
 
         return binding.root
     }
-
-    private fun selectImage() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        imagePickerLauncher.launch(intent)
-    }
-
-    private fun uploadImageToFirebase(uri: Uri) {
-        val imageName = getFileName(uri) // Obter o nome da imagem a partir da URI
-        val imageRef = storageRef.child(imageName)
-
-        // Upload da imagem para o Firebase Storage
-        imageRef.putFile(uri)
-            .addOnSuccessListener { taskSnapshot ->
-                // Imagem foi carregada com sucesso
-                Toast.makeText(requireContext(), "Imagem carregada com sucesso!", Toast.LENGTH_SHORT).show()
-
-                // Você pode obter a URL da imagem carregada para salvar no banco de dados, se necessário
-                imageRef.downloadUrl.addOnSuccessListener { downloadUrl ->
-                    val imageUrl = downloadUrl.toString()
-                    // Aqui você pode salvar a URL da imagem no banco de dados se necessário
-                    // Exemplo: saveImageUrlToDatabase(imageUrl)
-                }
-            }
-            .addOnFailureListener { e ->
-                // O upload da imagem falhou
-                Toast.makeText(requireContext(), "Falha ao carregar imagem: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private fun getFileName(uri: Uri): String {
-        // Obter o nome do arquivo a partir da URI
-        val cursor = requireContext().contentResolver.query(uri, null, null, null, null)
-        cursor?.use {
-            it.moveToFirst()
-            val displayName = it.getString(it.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
-            return displayName ?: "user_image.jpg" // Nome padrão caso não seja possível obter o nome
-        }
-        return "user_image.jpg" // Nome padrão caso ocorra algum problema
-    }
-
 
     private fun getUserData(){
         dbRef.child(uid).addValueEventListener(object : ValueEventListener{
