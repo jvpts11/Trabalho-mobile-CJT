@@ -102,7 +102,6 @@ class GamesListFragment : Fragment() {
             }
 
             gameName.text = allGamesList[position].gameName
-            Toast.makeText(mContext , gameOwner.text, Toast.LENGTH_SHORT).show()
 
             return allGamesItemView
         }

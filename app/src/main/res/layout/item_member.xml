@@ -24,6 +24,32 @@
         android:textColor="@color/black"
         android:id="@+id/memberName"/>
 
+    <ImageButton
+        android:id="@+id/lower_atd"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toEndOf="@id/memberName"
+        app:layout_constraintEnd_toStartOf="@id/add_atd"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/arrow_down_icon"
+        android:layout_marginRight="8dp"
+        android:visibility="gone"
+        android:backgroundTint="@color/black"/>
+
+    <ImageButton
+        android:id="@+id/add_atd"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toEndOf="@id/lower_atd"
+        app:layout_constraintEnd_toStartOf="@id/memberAttendance"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/arrow_up_icon"
+        android:layout_marginLeft="8dp"
+        android:visibility="gone"
+        android:backgroundTint="@color/black"/>
+
     <TextView
         android:layout_width="100dp"
         android:layout_height="match_parent"

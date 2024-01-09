@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +20,7 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.core.graphics.toColor
 import com.google.common.io.Resources.getResource
 import com.google.firebase.annotations.concurrent.Background
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -34,6 +37,7 @@ class MemberListFragment : Fragment() {
     private lateinit var binding: FragmentMemberListBinding
 
     private lateinit var dbRef : DatabaseReference
+    private lateinit var auth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +45,8 @@ class MemberListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding =  FragmentMemberListBinding.inflate(inflater, container, false)
+
+        auth = FirebaseAuth.getInstance()
 
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
         dbRef.addValueEventListener(object : ValueEventListener {
@@ -53,7 +59,7 @@ class MemberListFragment : Fragment() {
                     }
 
                     val listView = binding.memberList
-                    listView.adapter = memberListAdapter(memberList, context)
+                    listView.adapter = memberListAdapter(memberList, context, dbRef, auth)
                 }
             }
 
@@ -66,7 +72,7 @@ class MemberListFragment : Fragment() {
         return binding.root
     }
 
-    class memberListAdapter(val memberList : MutableList<User>, context : Context?) : BaseAdapter(){
+    class memberListAdapter(val memberList : MutableList<User>, context : Context?, val dbRef : DatabaseReference, val auth: FirebaseAuth) : BaseAdapter(){
 
         private val mContext : Context?
         init{
@@ -92,6 +98,8 @@ class MemberListFragment : Fragment() {
             val memberName = memberView.findViewById<TextView>(R.id.memberName)
             val memberAttendance = memberView.findViewById<TextView>(R.id.memberAttendance)
             val memberBackground = memberView.findViewById<View>(R.id.itemBackground)
+            val addAtd = memberView.findViewById<ImageButton>(R.id.add_atd)
+            val lowerAtd = memberView.findViewById<ImageButton>(R.id.lower_atd)
 
             memberName.text = memberList[position].name
             memberAttendance.text = memberList[position].attendance.toString()
@@ -119,6 +127,26 @@ class MemberListFragment : Fragment() {
             }
 
             memberBackground.setBackgroundColor(color)
+
+            dbRef.child(auth.currentUser?.uid.toString()).get().addOnSuccessListener {
+                if (it.exists()){
+                    val isAdmin : Boolean? = it.child("admin").getValue(Boolean::class.java)
+                    if (isAdmin == true){
+                        addAtd.visibility = View.VISIBLE
+                        lowerAtd.visibility = View.VISIBLE
+
+                        addAtd.setOnClickListener{
+                            val dbRef = FirebaseDatabase.getInstance().getReference("Users").child(auth.currentUser?.uid.toString()).child("attendance")
+                            dbRef.setValue(dbRef.toString().toInt() + 1)
+                        }
+
+                        lowerAtd.setOnClickListener{
+                            val dbRef = FirebaseDatabase.getInstance().getReference("Users").child(auth.currentUser?.uid.toString()).child("attendance")
+                            dbRef.setValue(dbRef.toString().toInt() - 1)
+                        }
+                    }
+                }
+            }
 
             return memberView
         }
