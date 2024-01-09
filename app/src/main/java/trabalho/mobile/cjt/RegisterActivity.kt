@@ -79,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
 
     //Cria na database um novo objeto do tipo User
     private fun saveUserObject(userId: String, username: String){
-        val user = User(username)
+        val user = User(username, userId)
         dbRef.child(userId).setValue(user)
     }
 }

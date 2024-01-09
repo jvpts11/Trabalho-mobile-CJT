@@ -53,6 +53,7 @@ class MemberListFragment : Fragment() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
+                    memberList.clear()
                     for (userSnapshot in snapshot.children){
                         val user = userSnapshot.getValue(User::class.java)
                         memberList.add(user!!)
@@ -136,13 +137,22 @@ class MemberListFragment : Fragment() {
                         lowerAtd.visibility = View.VISIBLE
 
                         addAtd.setOnClickListener{
-                            val dbRef = FirebaseDatabase.getInstance().getReference("Users").child(auth.currentUser?.uid.toString()).child("attendance")
-                            dbRef.setValue(dbRef.toString().toInt() + 1)
+                            var dbRefAux = FirebaseDatabase.getInstance().getReference("Users")
+                            val auxId = memberList[position].userid
+                            val dbRef = dbRefAux.child(auxId).child("attendance")
+                            //val newValueT = (dbRef.toString().toInt() + 1).toString()
+                            Toast.makeText(mContext, "!", Toast.LENGTH_SHORT).show()
+                            val newValue = 1
+                            dbRef.setValue(newValue)
                         }
 
                         lowerAtd.setOnClickListener{
-                            val dbRef = FirebaseDatabase.getInstance().getReference("Users").child(auth.currentUser?.uid.toString()).child("attendance")
-                            dbRef.setValue(dbRef.toString().toInt() - 1)
+                            var dbRefAux = FirebaseDatabase.getInstance().getReference("Users")
+                            val auxId = memberList[position].userid
+                            val dbRef = dbRefAux.child(auxId).child("attendance")
+                            //val newValue = dbRef.toString().toInt() - 1
+                            val newValue = 2
+                            dbRef.setValue(newValue)
                         }
                     }
                 }
