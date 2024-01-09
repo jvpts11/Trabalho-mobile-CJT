@@ -53,27 +53,35 @@ class ProfileActivity : AppCompatActivity() {
 
                 val atd : Int = user.attendance
                 val color : Int
+                val level : String
 
                 if (atd < 4) {
                     color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv1color)
+                    level = "1"
                 }
-                else if (atd in 5..8){
+                else if (atd >= 4 && atd < 9){
                     color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv2color)
+                    level = "2"
                 }
-                else if (atd in 10..14){
+                else if (atd >= 9 && atd < 15){
                     color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv3color)
+                    level = "3"
                 }
-                else if (atd in 16..21){
+                else if (atd >= 15 && atd < 22){
                     color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv4color)
+                    level = "4"
                 }
                 else if (atd >= 22){
                     color = ContextCompat.getColor(applicationContext, R.color.vibrant_lv5color)
+                    level = "5"
                 }
                 else{
                     color = 0
+                    level = "0"
                 }
 
                 binding.levelNumber.setTextColor(color)
+                binding.levelNumber.text = level
             }
 
             override fun onCancelled(error: DatabaseError) {

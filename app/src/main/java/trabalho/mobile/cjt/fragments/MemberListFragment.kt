@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
 import trabalho.mobile.cjt.R
 import trabalho.mobile.cjt.User
 import trabalho.mobile.cjt.databinding.FragmentMemberListBinding
@@ -49,6 +50,7 @@ class MemberListFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
+
         dbRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -111,13 +113,13 @@ class MemberListFragment : Fragment() {
             if (atd < 4) {
                 color = ContextCompat.getColor(mContext!!, R.color.lv1color)
             }
-            else if (atd in 5..8){
+            else if (atd >= 4 && atd < 9){
                 color = ContextCompat.getColor(mContext!!, R.color.lv2color)
             }
-            else if (atd in 10..14){
+            else if (atd >= 9 && atd < 15){
                 color = ContextCompat.getColor(mContext!!, R.color.lv3color)
             }
-            else if (atd in 16..21){
+            else if (atd >= 15 && atd < 22){
                 color = ContextCompat.getColor(mContext!!, R.color.lv4color)
             }
             else if (atd >= 22){
@@ -140,9 +142,7 @@ class MemberListFragment : Fragment() {
                             var dbRefAux = FirebaseDatabase.getInstance().getReference("Users")
                             val auxId = memberList[position].userid
                             val dbRef = dbRefAux.child(auxId).child("attendance")
-                            //val newValueT = (dbRef.toString().toInt() + 1).toString()
-                            Toast.makeText(mContext, "!", Toast.LENGTH_SHORT).show()
-                            val newValue = 1
+                            val newValue = memberList[position].attendance + 1
                             dbRef.setValue(newValue)
                         }
 
@@ -150,8 +150,7 @@ class MemberListFragment : Fragment() {
                             var dbRefAux = FirebaseDatabase.getInstance().getReference("Users")
                             val auxId = memberList[position].userid
                             val dbRef = dbRefAux.child(auxId).child("attendance")
-                            //val newValue = dbRef.toString().toInt() - 1
-                            val newValue = 2
+                            val newValue = memberList[position].attendance - 1
                             dbRef.setValue(newValue)
                         }
                     }
