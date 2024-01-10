@@ -85,12 +85,26 @@
         android:id="@+id/news_image"
         android:layout_width="224dp"
         android:layout_height="230dp"
+        android:src="@drawable/home_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars"
         tools:srcCompat="@drawable/home_icon" />
+
+    <ImageButton
+        android:id="@+id/news_button_upload"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/arrow_up_icon"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 

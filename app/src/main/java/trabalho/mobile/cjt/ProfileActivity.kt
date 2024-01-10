@@ -1,10 +1,9 @@
 package trabalho.mobile.cjt
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.api.Context
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -27,6 +26,7 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         auth = FirebaseAuth.getInstance()
         uid = auth.currentUser?.uid.toString()
         dbRef = FirebaseDatabase.getInstance().getReference("Users")
@@ -39,9 +39,9 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.usernameApplyButton.setOnClickListener({
+        binding.usernameApplyButton.setOnClickListener{
             dbRef.child(uid).child("name").setValue(binding.userNameEditText.text.toString())
-        })
+        }
     }
 
     private fun getUserData() {
